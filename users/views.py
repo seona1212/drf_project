@@ -1,8 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+)
 
-from users.serializers import Userserializer #import하기
+from users.serializers import CustomTokenObtainPairSerializer, Userserializer #import하기
+
+
 
 class UserView(APIView):
     def post(self, request):
@@ -12,3 +17,9 @@ class UserView(APIView):
             return Response({"message":"가입완료!"}, status=status.HTTP_201_CREATED)
         else:
             return Response({"message":f"${serializer.errors}"}, status=status.HTTP_400_BAD_REQUEST)
+        
+class CustomTokenObtainpairView(CustomTokenObtainpairView):
+    serializer_class = CustomTokenObtainPairSerializer
+
+
+    
