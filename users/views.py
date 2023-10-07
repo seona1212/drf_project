@@ -1,10 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework_simplejwt.views import (
-    TokenRefreshView,
-)
-
+from rest_framework_simplejwt.views import TokenObtainPairView
 from users.serializers import CustomTokenObtainPairSerializer, Userserializer #import하기
 
 
@@ -18,7 +15,7 @@ class UserView(APIView):
         else:
             return Response({"message":f"${serializer.errors}"}, status=status.HTTP_400_BAD_REQUEST)
         
-class CustomTokenObtainpairView(CustomTokenObtainpairView):
+class CustomTokenObtainpairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
